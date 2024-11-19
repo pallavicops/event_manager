@@ -19,3 +19,5 @@ class EventBloc {
     _eventServices.addEvent(event);
   }
 }
+
+final eventBloc = EventBloc();

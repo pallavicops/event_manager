@@ -101,7 +101,9 @@ class _AddEventState extends State<AddEvent> {
                     final String name = _nameController.text;
                     final String description = _descriptionController.text;
                     final String location = _locationController.text;
-                    final String date = _dateController.text;
+                    final String date = DateFormat('yyyy-MM-dd')
+                        .format(_dateController.text as DateTime)
+                        .toString();
 
                     if (name.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

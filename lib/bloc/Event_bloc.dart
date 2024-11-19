@@ -18,6 +18,10 @@ class EventBloc {
   void addEvent(Event event) {
     _eventServices.addEvent(event);
   }
+
+  void deleteEvent(String eventId) {
+    _eventServices.deleteEvent(eventId);
+  }
 }
 
 final eventBloc = EventBloc();

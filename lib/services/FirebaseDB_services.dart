@@ -65,4 +65,26 @@ class EventServices {
       rethrow; // Re-throw for additional error handling
     }
   }
+
+  //method for deleting an event
+  Future<void> deleteEvent(String eventId) async {
+    try {
+      final User? currentUser = _auth.currentUser;
+      if (currentUser == null) {
+        throw Exception("User not authenticated.");
+      }
+
+      final DatabaseReference userEventsRef = FirebaseDatabase.instance
+          .ref()
+          .child('users')
+          .child(currentUser.uid)
+          .child('events');
+
+      await userEventsRef.child(eventId).remove();
+      print("Event deleted successfully: $eventId");
+    } catch (e) {
+      print("Failed to delete event: $e");
+      rethrow;
+    }
+  }
 }

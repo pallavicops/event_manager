@@ -51,7 +51,7 @@ class EventServices {
 
       // Safely handle the dynamic map structure
       final Map<dynamic, dynamic> rawData =
-      snapshot.value as Map<dynamic, dynamic>;
+          snapshot.value as Map<dynamic, dynamic>;
 
       final List<Event> events = rawData.entries.map((entry) {
         final eventMap = Map<String, dynamic>.from(entry.value);
@@ -65,5 +65,4 @@ class EventServices {
       rethrow; // Re-throw for additional error handling
     }
   }
-
 }
