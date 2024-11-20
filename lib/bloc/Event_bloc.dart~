@@ -12,8 +12,8 @@ class EventBloc {
 
   final _eventServices = EventServices();
 
-  void fetchEvents() async {
-    await _eventServices
+  void fetchEvents() async{
+   await _eventServices
         .fetchAllEvents()
         .then((events) => _eventController.sink.add(events));
   }

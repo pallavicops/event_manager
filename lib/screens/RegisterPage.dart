@@ -100,7 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   String name = _nameController.text;
                   String email = _emailController.text;
                   String password = _passwordController.text;
@@ -122,15 +122,35 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     );
                   } else {
-                    AuthServices().register(email, password).then((user) {
+                    try {
+                      final user =
+                          await AuthServices().register(email, password);
                       if (user != null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Registration Successful"),
+                          ),
+                        );
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (context) => const Homepage(),
                           ),
                         );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text("Registration failed. Please try again."),
+                          ),
+                        );
                       }
-                    });
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Error: ${e.toString()}"),
+                        ),
+                      );
+                    }
                   }
                 },
                 child: const Text("Register"),

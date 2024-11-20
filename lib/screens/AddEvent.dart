@@ -6,7 +6,8 @@ import '../bloc/Event_bloc.dart';
 import '../models/Event_model.dart';
 
 class AddEvent extends StatefulWidget {
-  const AddEvent({super.key});
+  final EventBloc eventBloc;
+  const AddEvent({super.key, required this.eventBloc});
 
   @override
   State<AddEvent> createState() => _AddEventState();
@@ -117,11 +118,11 @@ class _AddEventState extends State<AddEvent> {
                         date: DateTime.parse(date),
                         createdBy: "User",
                       );
-                      eventBloc.addEvent(event);
+                      widget.eventBloc.addEvent(event);
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Event added successfully"),
                       ));
-                      eventBloc.fetchEvents();
+                      widget.eventBloc.fetchEvents();
                       Navigator.pop(context);
                     }
                   },

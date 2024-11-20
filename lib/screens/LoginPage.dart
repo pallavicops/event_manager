@@ -96,10 +96,6 @@ class _LoginpageState extends State<Loginpage> {
                           content: Text("Login Successful"),
                         ),
                       );
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Homepage()));
                     }
                   }).catchError((error) {
                     ScaffoldMessenger.of(context).showSnackBar(
