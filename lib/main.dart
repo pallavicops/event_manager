@@ -1,4 +1,5 @@
 import 'package:event_manager/screens/HomePage.dart';
+import 'package:event_manager/screens/LoginPage.dart';
 import 'package:event_manager/screens/RegisterPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
             } else if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             } else {
-              return const RegisterPage();
+              return const Loginpage();
             }
           }),
     );
