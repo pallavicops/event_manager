@@ -3,11 +3,22 @@ import 'package:event_manager/screens/LoginPage.dart';
 import 'package:event_manager/screens/RegisterPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseDatabase.instance.setPersistenceEnabled(true);
+
+  User? currentUser = FirebaseAuth.instance.currentUser;
+  final DatabaseReference userEventsRef = FirebaseDatabase.instance
+      .ref()
+      .child('users')
+      .child(currentUser!.uid)
+      .child('events');
+
+  userEventsRef.keepSynced(true);
   runApp(const MyApp());
 }
 
